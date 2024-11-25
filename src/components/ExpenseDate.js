@@ -1,3 +1,5 @@
+import './ExpenseDate.css'
+
 const ExpenseItem = (props) => {
 
    const day = props.data.date.toLocalString('en-US', {day: '2-digit'})
