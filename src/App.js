@@ -1,21 +1,30 @@
+// import logo from './logo.svg';
 import './App.css';
-import ExpenseItem from './components/ExpenseItem';
+
+import Expenses from './components/Expenses';
+import ExpenseItem from "./components/ExpenseItem";
+
 function App() {
-  const expenses = [{
-    date: new Date(2024, 10, 12),
-    title: 'New Book',
-    price: 30.99
-  },
-{
-  date: new Date(2024, 10, 12),
-  title: 'New jEANS',
-  price: 999.99
-}]
+    const expenses = [
+        {
+            date: new Date(2023, 0, 10),
+            title:'New book',
+            price: 30.99
+        },
+        {
+            date: new Date(2023, 0, 5),
+            title:'Icecream',
+            price: 3.99
+        }
+    ]
 
   return (
     <div className="App">
-      <ExpenseItem data={expenses[0]}/>
-      <ExpenseItem data={expenses[1]}/>
+        <div className='expenses'>
+          <ExpenseItem expenseData={expenses[0]}></ExpenseItem>
+          <ExpenseItem expenseData={expenses[1]}></ExpenseItem>
+        </div>
+        
     </div>
   );
 }
