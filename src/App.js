@@ -1,32 +1,52 @@
-// import logo from './logo.svg';
-import './App.css';
+import  { useEffect, useState } from "react";
+import "./App.css";
+import Expenses from "../src/components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
-import Expenses from './components/Expenses';
-import ExpenseItem from "./components/ExpenseItem";
 
-function App() {
-    const expenses = [
-        {
-            date: new Date(2023, 0, 10),
-            title:'New book',
-            price: 30.99
-        },
-        {
-            date: new Date(2023, 0, 5),
-            title:'Icecream',
-            price: 3.99
-        }
-    ]
+const DYMMY_EXPENSES = [
+  {
+    id: "id1",
+    date: new Date(2023, 10, 12),
+    title: "New book",
+    price: 30.99,
+  },
+  {
+    id: "id2",
+    date: new Date(2024, 10, 12),
+    title: "New jeans",
+    price: 99.99,
+  },
+  {
+    id: "id3",
+    date: new Date(2024, 0, 25),
+    title: "New life",
+    price: 139.99,
+  },
+];
+
+const App = () => {
+  const [expenses, setExpenses] = useState(() => {
+    const expensesFormLS = JSON.parse(localStorage.getItem('expenses'));
+    return expensesFormLS || [];
+  })
+
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  }, [expenses]);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((previousExpenses) => {
+      return [expense, ...previousExpenses]
+    })
+  };
 
   return (
     <div className="App">
-        <div className='expenses'>
-          <ExpenseItem expenseData={expenses[0]}></ExpenseItem>
-          <ExpenseItem expenseData={expenses[1]}></ExpenseItem>
-        </div>
-        
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses data={expenses} />
     </div>
   );
-}
+};
 
 export default App;
